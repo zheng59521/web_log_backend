@@ -27,9 +27,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "src/assets/vendor/leaflet/leaflet.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js",
+              "node_modules/@antv/g2/dist/g2.min.js",
+              "node_modules/@antv/data-set/dist/data-set.min.js",
+              "node_modules/@antv/g2-plugin-slider/dist/g2-plugin-slider.min.js",
+              "src/assets/vendor/leaflet/leaflet.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -56,17 +63,30 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "alain:build"
+            "browserTarget": "alain:build",
+            "proxyConfig":"proxyconfig.json"
           },
           "configurations": {
             "production": {
               "browserTarget": "alain:build:production"
+            },
+            "hmr": {
+              "browserTarget": "alain:build:hmr",
+              "hmr": true
             }
           }
         },
@@ -84,9 +104,16 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "src/assets/vendor/leaflet/leaflet.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js",
+              "node_modules/@antv/g2/dist/g2.min.js",
+              "node_modules/@antv/data-set/dist/data-set.min.js",
+              "node_modules/@antv/g2-plugin-slider/dist/g2-plugin-slider.min.js",
+              "src/assets/vendor/leaflet/leaflet.js"            
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -136,5 +163,41 @@
       }
     }
   },
-  "defaultProject": "alain"
+  "defaultProject": "alain",
+  "schematics": {
+    "ng-alain:module": {
+      "routing": true,
+      "spec": false
+    },
+    "ng-alain:list": {
+      "spec": false
+    },
+    "ng-alain:edit": {
+      "spec": false,
+      "modal": true
+    },
+    "ng-alain:view": {
+      "spec": false,
+      "modal": true
+    },
+    "ng-alain:curd": {
+      "spec": false
+    },
+    "@schematics/angular:module": {
+      "routing": true,
+      "spec": false
+    },
+    "@schematics/angular:component": {
+      "spec": false,
+      "flat": false,
+      "inlineStyle": true,
+      "inlineTemplate": false
+    },
+    "@schematics/angular:directive": {
+      "spec": false
+    },
+    "@schematics/angular:service": {
+      "spec": false
+    }
+  }
 }

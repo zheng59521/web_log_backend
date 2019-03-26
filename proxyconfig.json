@@ -1,0 +1,12 @@
+{
+  "/api":{
+    "target":"https://api.zhengjianheng.top/api",
+    "secure":false,
+    "logLevel":"debug",
+    "changeOrigin":true,
+    "pathRewrite":{
+      "^/api":""
+    }
+
+  }
+}
